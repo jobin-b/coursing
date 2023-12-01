@@ -1,4 +1,10 @@
+import { redirect } from "next/navigation";
+
 export default function Home() {
+  async function search(formData: FormData) {
+    "use server";
+    redirect(`/search?q=${formData.get("courseNumber")}`);
+  }
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24">
       <h1 className="mb-4 text-6xl font-semibold font-mono text-yellow-300">
@@ -8,10 +14,11 @@ export default function Home() {
         Import your courses to Google Calendar.
         <br /> For U of M students.
       </p>
-      <form action={`/query`} className="w-full h-full flex justify-center">
+      <form action={search} className="w-full h-full flex justify-center">
         <input
           type="text"
           name="courseNumber"
+          pattern="^\s*\d+\s*(?:,\s*\d+\s*)*$"
           className="w-1/4 bg-transparent border-b border-gray-500 focus:outline-none focus:border-gray-600 placeholder-gray-400"
           placeholder="Eg: 13503, 13602, 13706"
           required
