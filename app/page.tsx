@@ -1,11 +1,13 @@
 import { redirect } from "next/navigation";
 
+export async function searchForm(formData: FormData) {
+  "use server";
+  redirect(`/search?q=${formData.get("courseNumber")}`);
+}
+
 export default async function Home() {
   "use server";
-  async function search(formData: FormData) {
-    "use server";
-    redirect(`/search?q=${formData.get("courseNumber")}`);
-  }
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24">
       <h1 className="mb-4 text-6xl font-semibold font-mono text-[#FFCB05]">
@@ -15,19 +17,19 @@ export default async function Home() {
         Import your courses to Google Calendar.
         <br /> For University of Michigan students.
       </p>
-      <form action={search} className="w-full h-full flex justify-center">
+      <form
+        action={searchForm}
+        className="flex justify-center items-center border-2 px-3 py-2 rounded-full bg-neutral-100 text-[#00274C]"
+      >
         <input
           type="text"
           name="courseNumber"
           pattern="^\s*\d+\s*(?:,\s*\d+\s*)*$"
-          className="w-1/4 bg-transparent border-b border-neutral-100 focus:outline-none  text-neutral-100 placeholder-neutral-300"
+          className="w-96 text-lg bg-transparent focus:outline-none placeholder-[#00274C] text-[#00274C]"
           placeholder="Eg: 13503, 13602, 13706"
           required
         />
-        <button
-          type="submit"
-          className="border-b border-neutral-100 text-neutral-100"
-        >
+        <button type="submit" className="text-lg text-[#00274C]">
           -&gt;
         </button>
       </form>
