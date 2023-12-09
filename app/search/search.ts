@@ -1,6 +1,6 @@
 import fs from "fs";
 import { db } from "../db";
-import { SearchResult } from "./types";
+import { Course, SearchResult } from "./types";
 
 const CLASSTYPES = {
   LEC: "Lecture",
@@ -10,12 +10,12 @@ const CLASSTYPES = {
   REC: "Recitation",
 };
 
-export default function search(query: string[]): Promise<SearchResult[]> {
+export default function search(query: string[]): Promise<Course[]> {
   return new Promise((resolve, reject) => {
     db.all(
       `SELECT * FROM courses 
         WHERE classNbr IN (${query})`,
-      (err, rows: SearchResult[]) => {
+      (err, rows: Course[]) => {
         if (err) {
           console.error(err);
           reject(err);

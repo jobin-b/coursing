@@ -1,31 +1,32 @@
 import { redirect } from "next/navigation";
 
-export default function Home() {
+export default async function Home() {
+  "use server";
   async function search(formData: FormData) {
     "use server";
     redirect(`/search?q=${formData.get("courseNumber")}`);
   }
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24">
-      <h1 className="mb-4 text-6xl font-semibold font-mono text-yellow-300">
+      <h1 className="mb-4 text-6xl font-semibold font-mono text-[#FFCB05]">
         Coursing
       </h1>
-      <p className="mb-8 text-md text-mono text-neutral-300 flex-wrap text-center">
+      <p className="mb-8 text-md text-mono text-neutral-100 flex-wrap text-center">
         Import your courses to Google Calendar.
-        <br /> For U of M students.
+        <br /> For University of Michigan students.
       </p>
       <form action={search} className="w-full h-full flex justify-center">
         <input
           type="text"
           name="courseNumber"
           pattern="^\s*\d+\s*(?:,\s*\d+\s*)*$"
-          className="w-1/4 bg-transparent border-b border-gray-500 focus:outline-none focus:border-gray-600 placeholder-gray-400"
+          className="w-1/4 bg-transparent border-b border-neutral-100 focus:outline-none  text-neutral-100 placeholder-neutral-300"
           placeholder="Eg: 13503, 13602, 13706"
           required
         />
         <button
           type="submit"
-          className="border-b border-gray-500 text-gray-300"
+          className="border-b border-neutral-100 text-neutral-100"
         >
           -&gt;
         </button>
@@ -36,7 +37,7 @@ export default function Home() {
       </p>
       <a
         href="/help"
-        className="mt-4 text-sm text-yellow-200 hover:text-yellow-400"
+        className="mt-4 text-sm text-yellow-300 hover:text-[#FFCB05]"
       >
         How to find your course number?
       </a>
