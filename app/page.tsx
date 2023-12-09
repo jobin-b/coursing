@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 
-export async function searchForm(formData: FormData) {
+async function searchForm(formData: FormData) {
   "use server";
   redirect(`/search?q=${formData.get("courseNumber")}`);
 }

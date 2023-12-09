@@ -6,10 +6,12 @@ import { FiExternalLink } from "react-icons/fi";
 import { createCalendarLink } from "../utils/util";
 import Image from "next/image";
 import { redirect } from "next/navigation";
-import { searchForm } from "../page";
 
 // import { convert2sqlite } from "../convert2sqlite";
-
+async function searchForm(formData: FormData) {
+  "use server";
+  redirect(`/search?q=${formData.get("courseNumber")}`);
+}
 export default async function Search({
   searchParams,
 }: {
