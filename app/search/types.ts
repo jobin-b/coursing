@@ -1,15 +1,14 @@
 export type Course = {
-  query: string;
-  Term: string;
-  Session: string;
-  AcadGroup: string;
-  ClassNbr: string;
-  Subject: string;
-  CatalogNbr: string;
-  Section: string;
-  CourseTitle: string;
-  Component: string;
-  Codes: string;
+  classNbr: string;
+  term: string;
+  session: string;
+  acadGroup: string;
+  subject: string;
+  catalogNbr: string;
+  section: string;
+  courseTitle: string;
+  component: string;
+  codes: string;
   M: string;
   T: string;
   W: string;
@@ -17,24 +16,24 @@ export type Course = {
   F: string;
   S: string;
   SU: string;
-  StartDate: string;
-  EndDate: string;
-  Time: string;
-  Location: string;
-  Instructor: string;
-  Units: string;
+  startDate: string;
+  endDate: string;
+  time: string;
+  location: string;
+  instructor: string;
+  units: string;
+  name: string;
+  startTime: string;
+  endTime: string;
+  classType: "Lecture" | "Lab" | "Discussion" | "Seminar" | "Recitation";
 };
 
 export type Error = {
-  query: string;
   error: string;
 };
 
 export type SearchResult = Course | Error;
 
 export function isError(result: SearchResult): result is Error {
-  return (
-    (result as Error).query !== undefined &&
-    (result as Error).error !== undefined
-  );
+  return (result as Error).error !== undefined;
 }

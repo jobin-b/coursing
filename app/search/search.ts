@@ -1,36 +1,28 @@
 import fs from "fs";
-import Papa from "papaparse";
+import { db } from "../db";
+import { SearchResult } from "./types";
 
-function convert() {
-  const filePath = "data/WN2024.csv";
-  const fileData = fs.readFileSync(filePath, "utf-8");
-  const parsedData = Papa.parse(fileData, { header: true });
-  const data = parsedData.data;
-  const jsonData: any = {};
-  data.forEach((row: any) => {
-    const indexValue = row["Class Nbr"];
+const CLASSTYPES = {
+  LEC: "Lecture",
+  LAB: "Lab",
+  DIS: "Discussion",
+  SEM: "Seminar",
+  REC: "Recitation",
+};
 
-    if (indexValue !== undefined) {
-      jsonData[indexValue] = row;
-    }
+export default function search(query: string[]): Promise<SearchResult[]> {
+  return new Promise((resolve, reject) => {
+    db.all(
+      `SELECT * FROM courses 
+        WHERE classNbr IN (${query})`,
+      (err, rows: SearchResult[]) => {
+        if (err) {
+          console.error(err);
+          reject(err);
+        } else {
+          resolve(rows);
+        }
+      }
+    );
   });
-
-  fs.writeFileSync("data/WN2024.json", JSON.stringify(jsonData, null, 2));
-}
-
-export default function search(query: string[]) {
-  const filePath = "data/WN2024.json";
-  const data = JSON.parse(fs.readFileSync(filePath, "utf8"));
-  const results: any = [];
-  query.forEach((q) => {
-    const result = data[q];
-    if (result) {
-      result["query"] = q;
-      results.push(result);
-    } else {
-      results.push({ error: "No results found", query: q });
-    }
-  });
-  console.log(results);
-  return results;
 }
