@@ -1,10 +1,3 @@
-import { redirect } from "next/navigation";
-
-async function searchForm(formData: FormData) {
-  "use server";
-  redirect(`/search?q=${formData.get("courseNumber")}`);
-}
-
 export default async function Home() {
   "use server";
 
@@ -18,12 +11,12 @@ export default async function Home() {
         <br /> For University of Michigan students.
       </p>
       <form
-        action={searchForm}
+        action="/search"
         className="flex justify-center items-center border-2 px-3 py-2 rounded-full bg-neutral-100 text-[#00274C]"
       >
         <input
           type="text"
-          name="courseNumber"
+          name="q"
           pattern="^\s*\d+\s*(?:,\s*\d+\s*)*$"
           className="w-96 text-lg bg-transparent focus:outline-none placeholder-[#00274C] text-[#00274C]"
           placeholder="Eg: 13503, 13602, 13706"

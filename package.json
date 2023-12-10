@@ -9,15 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@nextui-org/react": "^2.2.9",
+    "@vercel/analytics": "^1.1.1",
     "@vercel/postgres": "^0.5.1",
-    "better-sqlite3": "^9.2.2",
+    "@vercel/speed-insights": "^1.0.1",
     "next": "14.0.3",
-    "papaparse": "^5.4.1",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^4.12.0",
-    "sharp": "^0.33.0",
-    "sqlite3": "^5.1.6"
+    "react-spinners": "^0.13.8",
+    "sharp": "^0.33.0"
   },
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.8",

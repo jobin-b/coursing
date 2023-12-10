@@ -22,7 +22,9 @@ export function createCalendarLink(course: Course) {
       course.starttime.split(":")[1] ? course.starttime.split(":")[1] : "0"
     ),
     endHours: parseInt(course.endtime.split(":")[0]),
-    endMinutes: parseInt(course.endtime.split(":")[1].slice(0, 2)),
+    endMinutes: parseInt(
+      course.endtime.split(":")[1] ? course.endtime.split(":")[1] : "0"
+    ),
   };
   if (isPm) {
     if (times.startHours <= times.endHours) {

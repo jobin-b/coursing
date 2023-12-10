@@ -1,17 +1,8 @@
 import Link from "next/link";
-import search from "./search";
-import { Course, Error, SearchResult, isError } from "./types";
-import { FaExternalLinkAlt } from "react-icons/fa";
-import { FiExternalLink } from "react-icons/fi";
-import { createCalendarLink } from "../utils/util";
-import Image from "next/image";
-import { redirect } from "next/navigation";
+import { Suspense } from "react";
+import { FadeLoader } from "react-spinners";
+import SearchResults from "./courses";
 
-// import { convert2sqlite } from "../convert2sqlite";
-async function searchForm(formData: FormData) {
-  "use server";
-  redirect(`/search?q=${formData.get("courseNumber")}`);
-}
 export default async function Search({
   searchParams,
 }: {
@@ -20,21 +11,10 @@ export default async function Search({
   "use server";
   const query = searchParams.q ? searchParams.q : "";
   const courses = query.replace(/\s/g, "").split(",");
-  let results: Course[] = [];
-  try {
-    results = await search(courses);
-  } catch (e) {
-    console.log(e);
-  }
-  let notFound = null;
-  if (results.length === 0 || results.length != courses.length) {
-    notFound = courses.filter(
-      (course) => !results.find((result) => result.classnbr === course)
-    );
-  }
+
   return (
-    <main className="flex min-h-screen w-screen flex-col items-center justify-start text-[#00274C]">
-      <div className="w-full h-[25vh] flex gap-8 pl-48 justify-start items-center">
+    <main className="flex min-h-screen w-screen flex-col items-center justify-start bg-white text-[#00274C]">
+      <div className="w-full h-[25vh] bg-[#00274C] flex gap-8 pl-48 justify-start items-center">
         <Link href="/">
           <h1 className="text-[#FFCB05] text-5xl font-extrabold">Coursing</h1>
         </Link>
@@ -46,12 +26,12 @@ export default async function Search({
             Course Numbers:
           </label>
           <form
-            action={searchForm}
+            action="/search"
             className="flex justify-center items-center border-2 px-3 py-2 rounded-full bg-neutral-100 text-[#00274C]"
           >
             <input
               type="text"
-              name="courseNumber"
+              name="q"
               pattern="^\s*\d+\s*(?:,\s*\d+\s*)*$"
               className="w-96 text-lg bg-transparent focus:outline-none placeholder-[#00274C] text-[#00274C]"
               placeholder="Eg: 13503, 13602, 13706"
@@ -64,91 +44,15 @@ export default async function Search({
           </form>
         </div>
       </div>
-      <div className="w-full bg-white min-h-[75vh] flex flex-col gap-8 justify-start items-start py-8 pl-48">
-        {notFound ? (
-          <p className="font-bold text-xl">
-            Could Not Find Courses: {notFound.join(", ")}
-          </p>
-        ) : null}
-        {results.map((result: Course, index) => {
-          return <Course key={result.classnbr} course={result} />;
-        })}
-      </div>
+      <Suspense
+        fallback={
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <FadeLoader />
+          </div>
+        }
+      >
+        <SearchResults courses={courses} />
+      </Suspense>
     </main>
-  );
-}
-
-function Course({ course }: { course: Course }) {
-  let daysArr = [
-    course.m,
-    course.t,
-    course.w,
-    course.th,
-    course.f,
-    course.s,
-    course.su,
-  ];
-  const days = daysArr.filter((day) => day != "").join(",");
-  const link = course.starttime != "TBA" ? createCalendarLink(course) : "";
-  return (
-    <section className="flex flex-col justify-center items-start gap-4 ">
-      <div>
-        <a
-          href={`https://atlas.ai.umich.edu/course/${course.name}/`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex justify-start items-center gap-2 hover:underline"
-        >
-          <h2 className="text-xl font-bold ">
-            {course.name}: {course.coursetitle} (
-            {course.classtype ? course.classtype : course.component})
-          </h2>
-          <FaExternalLinkAlt className="" />
-        </a>
-        <hr className="border-t-2 mb-2" />
-        <h3>
-          <pre className="flex">
-            Section: {course.section} |{" "}
-            <a
-              href={`https://www.ratemyprofessors.com/search/professors/1258?q=${course.instructor}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex justify-start gap-1 items-center hover:underline"
-            >
-              Instructor: {course.instructor}
-              <FiExternalLink />
-            </a>
-          </pre>
-        </h3>
-        <pre className="flex">
-          Credits: {course.units} | Location: {course.location}
-        </pre>
-        <pre className="flex">
-          {course.starttime === "TBA"
-            ? course.starttime
-            : `${course.starttime} - ${course.endtime}`}
-          <span> | {days ? days : "Days TBA"}</span>
-        </pre>
-      </div>
-      {link ? (
-        <a
-          href={link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex justify-center items-center gap-2 border-2 border-[#00274C] rounded-lg p-2"
-        >
-          <Image
-            src="/gmail.png"
-            alt="gmail icon"
-            width={25}
-            height={25}
-            priority
-          />
-          <p className="text-lg">Import to Google Calendar</p>
-        </a>
-      ) : (
-        <p>No times available to import.</p>
-      )}
-    </section>
   );
 }
