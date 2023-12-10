@@ -16,7 +16,6 @@ export default async function search(query: string[]): Promise<Course[]> {
     const courses = (
       await sql.query(`SELECT * FROM wn2024 WHERE classnbr = ANY($1)`, [query])
     ).rows as Course[];
-    console.log(courses);
     return courses;
   } catch (e) {
     console.log(e);
