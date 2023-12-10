@@ -2,6 +2,8 @@
 
 This project was developed to give University of Michigan students an easy way to import their classes to Google Calendar.
 
+Live @ https://coursing-zeta.vercel.app/
+
 ## Features
 
 - Import to Google Calendar
