@@ -1,31 +1,31 @@
 export type Course = {
-  classNbr: string;
+  classnbr: string;
   term: string;
   session: string;
-  acadGroup: string;
+  acadgroup: string;
   subject: string;
-  catalogNbr: string;
+  catalognbr: string;
   section: string;
-  courseTitle: string;
+  coursetitle: string;
   component: string;
   codes: string;
-  M: string;
-  T: string;
-  W: string;
-  TH: string;
-  F: string;
-  S: string;
-  SU: string;
-  startDate: string;
-  endDate: string;
+  m: string;
+  t: string;
+  w: string;
+  th: string;
+  f: string;
+  s: string;
+  su: string;
+  startdate: string;
+  enddate: string;
   time: string;
   location: string;
   instructor: string;
   units: string;
   name: string;
-  startTime: string;
-  endTime: string;
-  classType: "Lecture" | "Lab" | "Discussion" | "Seminar" | "Recitation";
+  starttime: string;
+  endtime: string;
+  classtype: "Lecture" | "Lab" | "Discussion" | "Seminar" | "Recitation";
 };
 
 export type Error = {

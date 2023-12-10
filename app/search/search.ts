@@ -1,5 +1,5 @@
 import fs from "fs";
-import { db } from "../db";
+import { sql } from "@vercel/postgres";
 import { Course, SearchResult } from "./types";
 
 const CLASSTYPES = {
@@ -10,19 +10,16 @@ const CLASSTYPES = {
   REC: "Recitation",
 };
 
-export default function search(query: string[]): Promise<Course[]> {
-  return new Promise((resolve, reject) => {
-    db.all(
-      `SELECT * FROM courses 
-        WHERE classNbr IN (${query})`,
-      (err, rows: Course[]) => {
-        if (err) {
-          console.error(err);
-          reject(err);
-        } else {
-          resolve(rows);
-        }
-      }
-    );
-  });
+export default async function search(query: string[]): Promise<Course[]> {
+  try {
+    const str = `SELECT * FROM wn2024 WHERE classnbr IN (${query})`;
+    const courses = (
+      await sql.query(`SELECT * FROM wn2024 WHERE classnbr = ANY($1)`, [query])
+    ).rows as Course[];
+    console.log(courses);
+    return courses;
+  } catch (e) {
+    console.log(e);
+    return [];
+  }
 }

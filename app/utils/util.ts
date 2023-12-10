@@ -3,29 +3,26 @@ import { Course } from "../search/types";
 export function createCalendarLink(course: Course) {
   const formattedDays = ["SA", "MO", "TU", "WE", "TH", "FR", "SU"];
   const daysOfWeek = [
-    course.S,
-    course.M,
-    course.T,
-    course.W,
-    course.TH,
-    course.F,
-    course.SU,
+    course.s,
+    course.m,
+    course.t,
+    course.w,
+    course.th,
+    course.f,
+    course.su,
   ];
   const formattedDaysOfWeek = daysOfWeek
     .map((day, index) => (day !== "" ? formattedDays[index] : ""))
     .filter((day) => day !== "")
     .join(",");
-  const firstDayIndex = daysOfWeek.findIndex((day) => day !== "");
-  const lastDayIndex =
-    daysOfWeek.length - 1 - daysOfWeek.reverse().findIndex((day) => day !== "");
-  const isPm = course.endTime.includes("PM");
+  const isPm = course.endtime.includes("PM");
   const times = {
-    startHours: parseInt(course.startTime.split(":")[0]),
+    startHours: parseInt(course.starttime.split(":")[0]),
     startMinutes: parseInt(
-      course.startTime.split(":")[1] ? course.startTime.split(":")[1] : "0"
+      course.starttime.split(":")[1] ? course.starttime.split(":")[1] : "0"
     ),
-    endHours: parseInt(course.endTime.split(":")[0]),
-    endMinutes: parseInt(course.endTime.split(":")[1].slice(0, 2)),
+    endHours: parseInt(course.endtime.split(":")[0]),
+    endMinutes: parseInt(course.endtime.split(":")[1].slice(0, 2)),
   };
   if (isPm) {
     if (times.startHours <= times.endHours) {
@@ -33,9 +30,18 @@ export function createCalendarLink(course: Course) {
     }
     times.endHours += 12;
   }
-  const startDate = new Date(course.startDate);
+  const startDate = new Date(course.startdate);
   // add firstDayIndex days to startDate
-  startDate.setDate(startDate.getDate() + firstDayIndex);
+  const firstDayIndex = daysOfWeek.findIndex((day) => day !== "");
+  let nextDayIndex = daysOfWeek.findIndex(
+    (day, index) => day !== "" && index > startDate.getDay()
+  );
+  nextDayIndex = nextDayIndex === -1 ? firstDayIndex : nextDayIndex;
+  if (daysOfWeek[startDate.getDay()] == "") {
+    while (startDate.getDay() !== nextDayIndex) {
+      startDate.setDate(startDate.getDate() + 1);
+    }
+  }
   startDate.setHours(times.startHours);
   startDate.setMinutes(times.startMinutes);
   const startTimeString =
@@ -44,9 +50,9 @@ export function createCalendarLink(course: Course) {
   startDate.setMinutes(times.endMinutes);
   const endTimeString =
     startDate.toISOString().replace(/[:-]/g, "").split(".")[0] + "Z";
-  const endDate = new Date(course.endDate);
+  const endDate = new Date(course.enddate);
   // add lastDayIndex days to endDate
-  endDate.setDate(endDate.getDate() + lastDayIndex);
+  endDate.setDate(endDate.getDate());
   const endDateString =
     endDate.toISOString().replace(/[:-]/g, "").split(".")[0] + "Z";
 

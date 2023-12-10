@@ -20,13 +20,13 @@
 //       course.CourseTitle,
 //       course.Component,
 //       course.Codes,
-//       course.M,
-//       course.T,
-//       course.W,
-//       course.TH,
-//       course.F,
-//       course.S,
-//       course.SU,
+//       course.m,
+//       course.t,
+//       course.w,
+//       course.th,
+//       course.f,
+//       course.s,
+//       course.su,
 //       course.StartDate,
 //       course.EndDate,
 //       course.Time,
@@ -42,7 +42,7 @@
 //       if (err) {
 //         console.error("Error inserting data:", err.message);
 //       } else {
-//         console.log(`Data inserted for classNbr: ${course.ClassNbr}`);
+//         console.log(`Data inserted for classnbr: ${course.ClassNbr}`);
 //       }
 //     });
 //   });

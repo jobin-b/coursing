@@ -29,7 +29,7 @@ export default async function Search({
   let notFound = null;
   if (results.length === 0 || results.length != courses.length) {
     notFound = courses.filter(
-      (course) => !results.find((result) => result.classNbr === course)
+      (course) => !results.find((result) => result.classnbr === course)
     );
   }
   return (
@@ -71,7 +71,7 @@ export default async function Search({
           </p>
         ) : null}
         {results.map((result: Course, index) => {
-          return <Course key={result.classNbr} course={result} />;
+          return <Course key={result.classnbr} course={result} />;
         })}
       </div>
     </main>
@@ -79,12 +79,17 @@ export default async function Search({
 }
 
 function Course({ course }: { course: Course }) {
-  let days = course.M + course.T + course.W + course.F + course.S;
-  days = days.split("").join(",");
-  if (course.SU !== "") {
-    days = days + "," + course.SU;
-  }
-  const link = course.startTime != "TBA" ? createCalendarLink(course) : "";
+  let daysArr = [
+    course.m,
+    course.t,
+    course.w,
+    course.th,
+    course.f,
+    course.s,
+    course.su,
+  ];
+  const days = daysArr.filter((day) => day != "").join(",");
+  const link = course.starttime != "TBA" ? createCalendarLink(course) : "";
   return (
     <section className="flex flex-col justify-center items-start gap-4 ">
       <div>
@@ -95,8 +100,8 @@ function Course({ course }: { course: Course }) {
           className="flex justify-start items-center gap-2 hover:underline"
         >
           <h2 className="text-xl font-bold ">
-            {course.name}: {course.courseTitle} (
-            {course.classType ? course.classType : course.component})
+            {course.name}: {course.coursetitle} (
+            {course.classtype ? course.classtype : course.component})
           </h2>
           <FaExternalLinkAlt className="" />
         </a>
@@ -119,9 +124,9 @@ function Course({ course }: { course: Course }) {
           Credits: {course.units} | Location: {course.location}
         </pre>
         <pre className="flex">
-          {course.startTime === "TBA"
-            ? course.startTime
-            : `${course.startTime} - ${course.endTime}`}
+          {course.starttime === "TBA"
+            ? course.starttime
+            : `${course.starttime} - ${course.endtime}`}
           <span> | {days ? days : "Days TBA"}</span>
         </pre>
       </div>
