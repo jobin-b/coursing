@@ -1,6 +1,6 @@
 import search from "./search";
 import { Course, Error, SearchResult, isError } from "./types";
-import { FaExternalLinkAlt } from "react-icons/fa";
+import { FaExternalLinkAlt, FaGithubSquare } from "react-icons/fa";
 import { FiExternalLink } from "react-icons/fi";
 import { createCalendarLink } from "../utils/util";
 import Image from "next/image";
@@ -21,36 +21,38 @@ export default async function SearchResults({
   let notFound = null;
   if (results.length === 0 || results.length != courses.length) {
     notFound = courses.filter(
-      (course) => !results.find((result) => result.classnbr === course)
+      (course) => !results.find((result) => result.classNbr === course)
     );
   }
   return (
-    <div className=" bg-white min-h-[75vh] flex flex-col gap-8 justify-start items-start py-8 pl-4 sm:pl-48">
-      {notFound ? (
-        <p className="font-bold text-xl">
-          Could Not Find Courses: {notFound.join(", ")}
-        </p>
-      ) : null}
-      {results.map((result: Course, index) => {
-        return <Course key={result.classnbr} course={result} />;
-      })}
-    </div>
+    <>
+      <div className=" bg-white flex flex-col gap-8 justify-start items-start py-8 px-4 sm:pl-48">
+        {notFound ? (
+          <p className="font-bold text-xl">
+            Could Not Find Courses: {notFound.join(", ")}
+          </p>
+        ) : null}
+        {results.map((result: Course, index) => {
+          return <Course key={result.classNbr} course={result} />;
+        })}
+      </div>
+    </>
   );
 }
 
 async function Course({ course }: { course: Course }) {
   "use server";
   let daysArr = [
-    course.m,
-    course.t,
-    course.w,
-    course.th,
-    course.f,
-    course.s,
-    course.su,
+    course.M,
+    course.T,
+    course.W,
+    course.TH,
+    course.F,
+    course.S,
+    course.SU,
   ];
   const days = daysArr.filter((day) => day != "").join(",");
-  const link = course.starttime != "TBA" ? createCalendarLink(course) : "";
+  const link = course.startTime != "TBA" ? createCalendarLink(course) : "";
   return (
     <section className="flex flex-col justify-center items-start gap-4 ">
       <div>
@@ -62,8 +64,8 @@ async function Course({ course }: { course: Course }) {
         >
           <div className="">
             <h2 className="text-xl font-bold inline p-0">
-              {course.name}: {course.coursetitle} (
-              {course.classtype ? course.classtype : course.component}){" "}
+              {course.name}: {course.courseTitle} (
+              {course.classType ? course.classType : course.component}){" "}
             </h2>
             <FaExternalLinkAlt className="inline mb-1" />
           </div>
@@ -87,9 +89,9 @@ async function Course({ course }: { course: Course }) {
           Credits: {course.units} | Location: {course.location}
         </pre>
         <pre className="flex">
-          {course.starttime === "TBA"
-            ? course.starttime
-            : `${course.starttime} - ${course.endtime}`}
+          {course.startTime === "TBA"
+            ? course.startTime
+            : `${course.startTime} - ${course.endTime}`}
           <span> | {days ? days : "Days TBA"}</span>
         </pre>
       </div>

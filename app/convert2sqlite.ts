@@ -20,29 +20,29 @@
 //       course.CourseTitle,
 //       course.Component,
 //       course.Codes,
-//       course.m,
-//       course.t,
-//       course.w,
-//       course.th,
-//       course.f,
-//       course.s,
-//       course.su,
+//       course.M,
+//       course.T,
+//       course.W,
+//       course.TH,
+//       course.F,
+//       course.S,
+//       course.SU,
 //       course.StartDate,
-//       course.EndDate,
+//       course.endDate,
 //       course.Time,
 //       course.Location,
 //       course.Instructor,
 //       course.Units,
 //       course.Name,
-//       course.StartTime,
-//       course.EndTime,
-//       course.ClassType,
+//       course.startTime,
+//       course.endTime,
+//       course.classType,
 //     ];
 //     db.run(insertSql, values, (err) => {
 //       if (err) {
 //         console.error("Error inserting data:", err.message);
 //       } else {
-//         console.log(`Data inserted for classnbr: ${course.ClassNbr}`);
+//         console.log(`Data inserted for classNbr: ${course.ClassNbr}`);
 //       }
 //     });
 //   });

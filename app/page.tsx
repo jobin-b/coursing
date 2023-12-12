@@ -1,8 +1,9 @@
+import { join } from "path";
 import { FaGithubSquare } from "react-icons/fa";
 
 export default async function Home() {
   "use server";
-
+  console.log(join(__dirname, "..", "..", "data", "courses.sqlite"));
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24">
       <h1 className="mb-4 text-6xl font-semibold font-mono text-[#FFCB05]">
