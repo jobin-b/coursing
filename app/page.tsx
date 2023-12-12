@@ -1,3 +1,5 @@
+import { FaGithubSquare } from "react-icons/fa";
+
 export default async function Home() {
   "use server";
 
@@ -35,6 +37,17 @@ export default async function Home() {
         className="mt-4 text-sm text-yellow-300 hover:text-[#FFCB05]"
       >
         How to find your course number?
+      </a>
+      <a
+        href="https://github.com/jobin-b/coursing"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="github link"
+      >
+        <FaGithubSquare
+          className="h-12 w-12 absolute bottom-2 right-2 text-neutral-300 hover:text-[#FFCB05] hover:opacity-100 transition-all opacity-50"
+          alt="github link"
+        />
       </a>
     </main>
   );

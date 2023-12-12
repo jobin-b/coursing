@@ -22,7 +22,7 @@ export default function RootLayout({
       <body
         className={
           inter.className +
-          "min-h-screen min-w-full text-neutral-100 bg-[#00274C]"
+          "min-h-screen min-w-[90%] text-neutral-100 bg-[#00274C]"
         }
       >
         {children}

@@ -25,7 +25,7 @@ export default async function SearchResults({
     );
   }
   return (
-    <div className="w-full bg-white min-h-[75vh] flex flex-col gap-8 justify-start items-start py-8 pl-48">
+    <div className=" bg-white min-h-[75vh] flex flex-col gap-8 justify-start items-start py-8 pl-4 sm:pl-48">
       {notFound ? (
         <p className="font-bold text-xl">
           Could Not Find Courses: {notFound.join(", ")}
@@ -60,11 +60,13 @@ async function Course({ course }: { course: Course }) {
           rel="noopener noreferrer"
           className="flex justify-start items-center gap-2 hover:underline"
         >
-          <h2 className="text-xl font-bold ">
-            {course.name}: {course.coursetitle} (
-            {course.classtype ? course.classtype : course.component})
-          </h2>
-          <FaExternalLinkAlt className="" />
+          <div className="">
+            <h2 className="text-xl font-bold inline p-0">
+              {course.name}: {course.coursetitle} (
+              {course.classtype ? course.classtype : course.component}){" "}
+            </h2>
+            <FaExternalLinkAlt className="inline mb-1" />
+          </div>
         </a>
         <hr className="border-t-2 mb-2" />
         <h3>
