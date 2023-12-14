@@ -17,17 +17,17 @@ export default async function Search({
     courses = courses.slice(0, 10);
   }
   return (
-    <main className="flex min-h-screen w-screen flex-col justify-start bg-white text-[#00274C]">
-      <div className="w-full h-[15vh] sm:h-[25vh] bg-[#00274C] flex gap-8 pl-4 sm:pl-48 justify-start items-center">
+    <main className="flex min-h-screen w-full flex-col justify-start bg-white text-[#00274C]">
+      <div className="w-full sm:w h-[15vh] sm:h-[25vh] md:h-[20vh] lg:h-[25vh] bg-[#00274C] flex  px-4 md:pl-24 lg:pl-48 justify-between sm:justify-start sm:gap-8 items-center">
         <Link href="/">
           <h1 className="text-[#FFCB05] text-2xl sm:text-5xl font-extrabold">
             Coursing
           </h1>
         </Link>
-        <div className="flex flex-col gap-1 sm:w-[35%]">
+        <div className="flex flex-col gap-1 sm:w-[35%] md:w-[50%] lg:w-[35%]">
           <label
             htmlFor="courseNumber"
-            className="mr-2 text-white ml-4 sm:text-lg"
+            className="mr-2 text-white ml-4 text-sm sm:text-lg"
           >
             Course Numbers:
           </label>

@@ -1,15 +1,15 @@
 import { join } from "path";
 import { FaGithubSquare } from "react-icons/fa";
+import { IoMdSearch } from "react-icons/io";
 
 export default async function Home() {
   "use server";
-  console.log(join(__dirname, "..", "..", "data", "courses.sqlite"));
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
+    <main className="flex px-4 h-[90vh] flex-col items-center justify-center p-24">
       <h1 className="mb-4 text-6xl font-semibold font-mono text-[#FFCB05]">
         Coursing
       </h1>
-      <p className="mb-8 text-md text-mono text-neutral-100 flex-wrap text-center">
+      <p className="mb-8 w-48 sm:w-full text-md text-mono text-neutral-100 flex-wrap text-center">
         Import your courses to Google Calendar.
         <br /> For University of Michigan students.
       </p>
@@ -21,12 +21,12 @@ export default async function Home() {
           type="text"
           name="q"
           pattern="^\s*\d+\s*(?:,\s*\d+\s*)*$"
-          className="w-96 text-lg bg-transparent focus:outline-none placeholder-[#00274C] text-[#00274C]"
+          className="w-64 md:w-96 sm:text-lg bg-transparent focus:outline-none placeholder-[#00274C] text-[#00274C]"
           placeholder="Eg: 13503, 13602, 13706"
           required
         />
-        <button type="submit" className="text-lg text-[#00274C]">
-          -&gt;
+        <button type="submit" className="text-2xl text-[#00274C]">
+          <IoMdSearch />
         </button>
       </form>
       <p className="mt-4 text-sm text-neutral-300 text-center">
@@ -35,20 +35,9 @@ export default async function Home() {
       </p>
       <a
         href="/help"
-        className="mt-4 text-sm text-yellow-300 hover:text-[#FFCB05]"
+        className="mt-4 text-center text-sm text-yellow-300 hover:text-[#FFCB05]"
       >
         How to find your course number?
-      </a>
-      <a
-        href="https://github.com/jobin-b/coursing"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="github link"
-      >
-        <FaGithubSquare
-          className="h-12 w-12 absolute bottom-2 right-2 text-neutral-300 hover:text-[#FFCB05] hover:opacity-100 transition-all opacity-50"
-          alt="github link"
-        />
       </a>
     </main>
   );

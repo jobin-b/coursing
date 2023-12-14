@@ -26,7 +26,7 @@ export default async function SearchResults({
   }
   return (
     <>
-      <div className=" bg-white flex flex-col gap-8 justify-start items-start py-8 px-4 sm:pl-48">
+      <div className=" bg-white flex flex-col gap-8 justify-start items-start py-8 px-4 md:pl-24 lg:pl-48">
         {notFound ? (
           <p className="font-bold text-xl">
             Could Not Find Courses: {notFound.join(", ")}
