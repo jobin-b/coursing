@@ -1,6 +1,6 @@
 # Coursing
 
-This project was developed to give University of Michigan students an easy way to import their classes to Google Calendar.
+Developed to give University of Michigan students an easy way to import their classes to Google Calendar.
 
 Live @ https://coursing-zeta.vercel.app/
 
@@ -15,6 +15,6 @@ Live @ https://coursing-zeta.vercel.app/
 - Nextjs
 - React
 - TypeScript
-- Vercel Postgres
+- Sqlite
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).

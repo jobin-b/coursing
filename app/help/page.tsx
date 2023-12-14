@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { FaGithubSquare } from "react-icons/fa";
 
 export default async function Help() {
   "use server";
