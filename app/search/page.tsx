@@ -9,7 +9,7 @@ export default async function Search({
 }: {
   searchParams: { [key: string]: string | undefined };
 }) {
-  "use client";
+  "use server";
   const query = searchParams.q ? searchParams.q : "";
   let courses = query.replace(/\s/g, "").split(",");
   if (courses.length > 10) {
