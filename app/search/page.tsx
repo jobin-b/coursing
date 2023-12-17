@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { FadeLoader } from "react-spinners";
 import SearchResults from "./courses";
-import { FaGithubSquare } from "react-icons/fa";
 import { IoMdSearch } from "react-icons/io";
 
 export default async function Search({
@@ -10,14 +9,17 @@ export default async function Search({
 }: {
   searchParams: { [key: string]: string | undefined };
 }) {
-  "use server";
+  "use client";
   const query = searchParams.q ? searchParams.q : "";
   let courses = query.replace(/\s/g, "").split(",");
   if (courses.length > 10) {
     courses = courses.slice(0, 10);
   }
   return (
-    <main className="flex min-h-screen w-full flex-col justify-start bg-white text-[#00274C]">
+    <main
+      className="flex min-h-[90vh] w-full flex-col justify-start bg-white text-[#00274C]"
+      id="top"
+    >
       <div className="w-full sm:w h-[15vh] sm:h-[25vh] md:h-[20vh] lg:h-[25vh] bg-[#00274C] flex  px-4 md:pl-24 lg:pl-48 justify-between sm:justify-start sm:gap-8 items-center">
         <Link href="/">
           <h1 className="text-[#FFCB05] text-2xl sm:text-5xl font-extrabold">
@@ -40,12 +42,16 @@ export default async function Search({
               name="q"
               pattern="^\s*\d+\s*(?:,\s*\d+\s*)*$"
               className="w-full sm:text-lg bg-transparent focus:outline-none placeholder-[#00274C] text-[#00274C]"
-              placeholder="Eg: 13503, 13602"
+              placeholder="Eg: 10618, 10641"
               defaultValue={query}
               required
             />
-            <button type="submit" className="text-2xl text-[#00274C]">
-              <IoMdSearch />
+            <button
+              type="submit"
+              className="text-2xl text-[#00274C]"
+              aria-label="search"
+            >
+              <IoMdSearch alt="search icon" />
             </button>
           </form>
         </div>

@@ -22,11 +22,15 @@ export default async function Home() {
           name="q"
           pattern="^\s*\d+\s*(?:,\s*\d+\s*)*$"
           className="w-64 md:w-96 sm:text-lg bg-transparent focus:outline-none placeholder-[#00274C] text-[#00274C]"
-          placeholder="Eg: 13503, 13602, 13706"
+          placeholder="Eg: 10618, 10641, 10630"
           required
         />
-        <button type="submit" className="text-2xl text-[#00274C]">
-          <IoMdSearch />
+        <button
+          type="submit"
+          className="text-2xl text-[#00274C]"
+          aria-label="search"
+        >
+          <IoMdSearch alt="search icon" />
         </button>
       </form>
       <p className="mt-4 text-sm text-neutral-300 text-center">

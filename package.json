@@ -13,13 +13,15 @@
     "@vercel/analytics": "^1.1.1",
     "@vercel/postgres": "^0.5.1",
     "@vercel/speed-insights": "^1.0.1",
-    "better-sqlite3": "^9.2.2",
     "next": "14.0.3",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^4.12.0",
+    "react-scroll-to-top": "^3.0.0",
     "react-spinners": "^0.13.8",
-    "sharp": "^0.33.0"
+    "sharp": "^0.33.0",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^5.1.6"
   },
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.8",

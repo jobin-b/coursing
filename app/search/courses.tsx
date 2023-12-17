@@ -4,6 +4,7 @@ import { FaExternalLinkAlt, FaGithubSquare } from "react-icons/fa";
 import { FiExternalLink } from "react-icons/fi";
 import { createCalendarLink } from "../utils/util";
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function SearchResults({
   courses,
@@ -26,7 +27,7 @@ export default async function SearchResults({
   }
   return (
     <>
-      <div className=" bg-white flex flex-col gap-8 justify-start items-start py-8 px-4 md:pl-24 lg:pl-48">
+      <div className=" bg-white flex h-full flex-col gap-8 justify-between items-start py-8 px-4 md:pl-24 lg:pl-48">
         {notFound ? (
           <p className="font-bold text-xl">
             Could Not Find Courses: {notFound.join(", ")}
@@ -35,6 +36,7 @@ export default async function SearchResults({
         {results.map((result: Course, index) => {
           return <Course key={result.classNbr} course={result} />;
         })}
+        <Link href="#top">Scroll to top</Link>
       </div>
     </>
   );

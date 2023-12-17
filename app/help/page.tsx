@@ -10,7 +10,9 @@ export default async function Help() {
           <li>Visit your class schedule (or Atlas) and select WN 24</li>
           <li>Find the classes you want to add</li>
           <li>
-            <p className="mb-2">Identify the course number as shown</p>
+            <p className="mb-2">
+              Identify the course number as shown (5 digit number)
+            </p>
             <Image
               src="/info.jpg"
               alt="course info"

@@ -11,6 +11,9 @@ export const metadata: Metadata = {
   title: "Coursing",
   description:
     "Import your courses to Google Calendar. For University of Michigan students.",
+  other: {
+    "google-site-verification": "ioMMpkIs3H_rMfI9Axi_PSWLL3u4u5PPca5BZnDJclY",
+  },
 };
 
 export default function RootLayout({
