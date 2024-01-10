@@ -44,22 +44,26 @@ export function createCalendarLink(course: Course) {
       startDate.setDate(startDate.getDate() + 1);
     }
   }
-  startDate.setHours(times.startHours);
-  startDate.setMinutes(times.startMinutes);
+  startDate.setUTCHours(times.startHours + 5); // EST to UTC
+  startDate.setUTCMinutes(times.startMinutes);
   const startTimeString =
     startDate.toISOString().replace(/[:-]/g, "").split(".")[0] + "Z";
-  startDate.setHours(times.endHours);
-  startDate.setMinutes(times.endMinutes);
+  startDate.setUTCHours(times.endHours + 5); // EST to UTC
+  startDate.setUTCMinutes(times.endMinutes);
   const endTimeString =
     startDate.toISOString().replace(/[:-]/g, "").split(".")[0] + "Z";
   const endDate = new Date(course.endDate);
+  endDate.setUTCHours(endDate.getHours());
   // add lastDayIndex days to endDate
   endDate.setDate(endDate.getDate());
   const endDateString =
     endDate.toISOString().replace(/[:-]/g, "").split(".")[0] + "Z";
-
+  let classType = course.classType ? course.classType : course.component;
+  if (classType === "Lecture") {
+    classType = "";
+  }
   const googleCalendarLink = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
-    `${course.name}`
+    `${course.name} ${classType}`
   )}&dates=${startTimeString}/${endTimeString}&location=${encodeURIComponent(
     course.location
   )}&recur=RRULE:FREQ=WEEKLY;BYDAY=${formattedDaysOfWeek};UNTIL=${endDateString}`;
